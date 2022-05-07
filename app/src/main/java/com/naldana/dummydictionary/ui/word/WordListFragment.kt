@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.naldana.dummydictionary.DummyDictionaryApplication
 import com.naldana.dummydictionary.R
 import com.naldana.dummydictionary.databinding.FragmentWordListBinding
 import com.naldana.dummydictionary.repository.DictionaryRepository
@@ -15,10 +16,14 @@ class WordListFragment : Fragment() {
     private val viewModelFactory by lazy {
         val repository = DictionaryRepository()
         WordViewModelFactory(repository)
+        val application = requireActivity().application as DummyDictionaryApplication
+        WordViewModelFactory(application.getDictionaryRepository())
     }
+
     private val viewModel: WordViewModel by viewModels {
         viewModelFactory
     }
+
     private lateinit var binding: FragmentWordListBinding
 
     override fun onCreateView(
@@ -43,4 +48,5 @@ class WordListFragment : Fragment() {
             wordAdapter.setData(data)
         }
     }
+
 }

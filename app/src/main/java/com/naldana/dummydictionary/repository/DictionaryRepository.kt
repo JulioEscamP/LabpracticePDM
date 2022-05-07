@@ -1,6 +1,7 @@
 package com.naldana.dummydictionary.repository
 import androidx.lifecycle.MutableLiveData
-import com.naldana.dummydictionary.model.Word
+import com.naldana.dummydictionary.data.model.Word
+import com.naldana.dummydictionary.data.model.dao
 
 class DictionaryRepository {
 
@@ -8,7 +9,7 @@ class DictionaryRepository {
         Word("arquivolta", "f. Arq. Moldura que decora la cara exterior de un arco."),
         Word(
             "pucelano, na",
-            "adj. coloq. Natural de Valladolid, ciudad de España. U. t. c. s."
+            "adj. coloq. Natural de Valladolid, ciudad de España. U. t. c. s.",
         ),
         Word(
             "alotropía",
@@ -41,4 +42,18 @@ class DictionaryRepository {
         _words.add(word)
         words.value = _words
     }
+
+    class DictionaryRepository(
+        private val wordDoa: dao.WordDao,
+        val synonymDao: dao.SynonymDao,
+        val antonymDao: dao.AntonymDao
+    ) {
+
+        fun getAllWords() = wordDoa.getAllWords()
+
+        suspend fun addWord(word: Word) {
+            wordDoa.insertWord(word)
+        }
+    }
+
 }
