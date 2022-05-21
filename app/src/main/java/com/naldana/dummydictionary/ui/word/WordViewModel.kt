@@ -7,7 +7,7 @@ import com.naldana.dummydictionary.repository.DictionaryRepository
 import kotlinx.coroutines.launch
 
 class WordViewModel(private val repository: DictionaryRepository): ViewModel() {
-    val words = repository.
+    val words = repository.getAllWords()
 
     fun addword(word: Word){
         viewModelScope.launch{
