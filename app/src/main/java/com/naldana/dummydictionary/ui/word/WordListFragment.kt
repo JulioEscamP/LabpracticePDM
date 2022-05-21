@@ -14,8 +14,6 @@ import com.naldana.dummydictionary.repository.DictionaryRepository
 
 class WordListFragment : Fragment() {
     private val viewModelFactory by lazy {
-        val repository = DictionaryRepository()
-        WordViewModelFactory(repository)
         val application = requireActivity().application as DummyDictionaryApplication
         WordViewModelFactory(application.getDictionaryRepository())
     }
