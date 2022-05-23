@@ -1,6 +1,7 @@
 package com.naldana.dummydictionary.network.dto
 
 import com.google.gson.annotations.SerializedName
+import com.naldana.dummydictionary.data.model.Word
 
 data class WordsResponse (
     @SerializedName("count")

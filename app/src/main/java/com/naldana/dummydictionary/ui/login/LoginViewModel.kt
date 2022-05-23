@@ -21,12 +21,12 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
         _status.value = LoginUiStatus.Loading
         viewModelScope.launch(Dispatchers.IO) {
             _status.postValue(
-                when (val response = repository.login(
+                when (val response = repository.getloginRepository(
                     userField.value.toString(),
                     passwordField.value.toString()
                 )){
                     is ApiResponse.Error -> LoginUiStatus.Error(response.exception)
-                    is ApiResponse.ErrorWithMessage -> LoginUistatusResume
+                    is ApiResponse.ErrorWithMessage -> LoginUiStatus.Resume
                     is ApiResponse.Success -> LoginUiStatus.Success(response.data)
                 }
             )

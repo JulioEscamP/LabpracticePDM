@@ -12,8 +12,7 @@ import retrofit2.HttpException
 class DictionaryRepository (
     database: DummyDictionaryDatabase,
     private val api:WordService,
-    val synonymDao: dao.SynonymDao,
-    val antonymDao: dao.AntonymDao
+
 ) {
     private val wordDoa = database.wordDao()
 

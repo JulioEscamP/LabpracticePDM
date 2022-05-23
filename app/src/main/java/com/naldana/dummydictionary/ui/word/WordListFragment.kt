@@ -11,11 +11,13 @@ import com.naldana.dummydictionary.DummyDictionaryApplication
 import com.naldana.dummydictionary.R
 import com.naldana.dummydictionary.databinding.FragmentWordListBinding
 import com.naldana.dummydictionary.repository.DictionaryRepository
+import com.naldana.dummydictionary.ui.ViewModelFactory
 
 class WordListFragment : Fragment() {
+
     private val viewModelFactory by lazy {
         val application = requireActivity().application as DummyDictionaryApplication
-        WordViewModelFactory(application.getDictionaryRepository())
+        ViewModelFactory(application.getDictionaryRepository())
     }
 
     private val viewModel: WordViewModel by viewModels {
@@ -41,6 +43,9 @@ class WordListFragment : Fragment() {
         wordListRecyclerView.apply {
             adapter = wordAdapter
         }
+
+        viewModel.getAllWords()
+
 
         viewModel.words.observe(viewLifecycleOwner) { data ->
             wordAdapter.setData(data)
